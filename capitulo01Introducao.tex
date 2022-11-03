@@ -1,0 +1,16 @@
+\chapter{INTRODUÇÃO}
+\label{cap:01}
+\section{\ac{p2p}}
+ 
+Redes \textit{\ac{p2p}}  são redes virtuais que funcionam na Internet nas quais os membros são equivalentes em funcionalidades, permitindo que os participantes ou pares, compartilhem recursos diretamente, sem envolver um servidor central ou outro tipo de intermediários, dessa forma funcionando com uma arquitetura descentralizada. Como não há um servidor armazenando informações de identificação dos pares, torna-se muito difícil rastrear e identificar um usuário do sistema, garantindo a segurança da rede. O controle de conexões e fluxo de informações em uma rede \ac{p2p} em uma arquitetura distribuída, ou seja, as informações de controle (indexação e descoberta de pares) circulam entre os pares, assim como os dados. \cite{p2p, rocha2004peer}
+
+Existem dois tipos principais de arquitetura, a arquitetura descentralizada, onde cada par dentro da arquitetura são equivalentes em funcionalidades e não existe nenhum nó que controle o fluxo de informações e dados dentro da rede. A segunda principal arquitetura é a Semicentralizada, onde os nós também são equivalentes em funcionalidades mas ao menos um dos nós servirá  ao papel de controle desempenhando uma autoridade dentro da rede.\cite{inproceedings}
+
+
+\section{Sistemas Distribuidos}
+Parte da definição de sistemas distruibuídos é que maquinas diferentes conectadas por uma rede, se comunicam e coordenam suas ações através de mensagens enviadas entre si, e  apresentando-se como um sistema único aos usuários, para isso é ocultado algumas das características e assim sendo definidos como transparentes. As principais formas de transparencias são acessos, localização, migração, relocação, replicação, concorrência e falha. \cite{van2002distributed, coulourisdistributed}
+
+
+As redes \ac{p2p} conseguem se manter transparentes em concorrência, pois um serviço ou cliente faz requisições em mais de um servidor, já que não possui um servidor centralizado. Dessa mesma forma, é ocultado o lugar onde um recurso está localizado, mantendo também a transparência na replicação, pois permite que várias instâncias dos recursos sejam usadas para aumentar a confiabilidade e desempenho. \cite{van2002distributed}
+    
+“São sistemas distribuídos compostos de nós interconectados, aptos a se auto-organizar em topologias de rede, com o intuito de compartilhar recursos, como conteúdo, ciclos de CPU, largura de banda e armazenamento, com a capacidade de adaptação a faltas e acomodação a um número variável de nós, ao mesmo tempo que mantém a conectividade e o desempenho em níveis aceitáveis, sem a necessidade de suporte ou intermediação de um servidor centralizado.” \cite{androutsellis2004survey}

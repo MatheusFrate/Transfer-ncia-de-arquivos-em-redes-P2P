@@ -1,0 +1,404 @@
+
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	oneside,			% para impressão em verso e anverso.  Usar twoside
+	a4paper,			% tamanho do papel. 
+	%normalfigtabnum,
+	%pnumromarab,
+	% -- opções da classe abntex2 --
+	chapter=Title,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	french,				% idioma adicional para hifenização
+	spanish,			% idioma adicional para hifenização
+	brazil,				% o último idioma é o principal do documento
+]{abntex2}
+
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout
+
+
+% ---------------------------------------------------------------------------------
+%                                   PACOTES
+% ---------------------------------------------------------------------------------
+
+% ---
+% Pacotes básicos 
+% ---
+\usepackage{acro}
+\usepackage{mathptmx}			% Usa a fonte Times New Roman
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage{lastpage}			% Usado pela Ficha catalográfica
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{xcolor,colortbl}	% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+\usepackage{hyperref}
+\usepackage{subfig}
+\usepackage{epigraph}
+\usepackage{url}
+\usepackage{placeins}
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\usepackage{multirow}
+\usepackage[figuresright]{rotating}
+\usepackage{chemfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{bigints}
+\usepackage{listings}
+\usepackage{etoolbox}
+\usepackage[final]{pdfpages}
+\usepackage{bigstrut}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{epsfig}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage[bottom]{footmisc}
+\usepackage{float}
+\DeclareUnicodeCharacter{00A0}{ }
+\renewcommand{\sfdefault}{\rmdefault}
+
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf,abnt-emphasize=bf,abnt-etal-text=emph,bibjustif]{abntex2cite}  % Citações padrão ABNT
+
+
+% ---------------------------------------------------------------------------------
+%                          CONFIGURAÇÕES DOS PACOTES
+% ---------------------------------------------------------------------------------
+
+% ---
+% Configurações do pacote backref
+%
+% Para desativar, tire o comentário de \begin{comment} e \end{comment} 
+% das próximas linhas e comente a linha \usepackage[brazilian,hyperpageref]{backref}
+% acima.
+% ---
+
+%\begin{comment}
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+	Nenhuma citação no texto.%
+	\or
+	Citado na página #2.%
+	\else
+	Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+%\end{comment}
+
+
+% listagens
+\definecolor{corComentario}{RGB}{150,150,150}
+\definecolor{corString}{RGB}{206,123,0}
+\definecolor{corPalavraChave}{RGB}{0,0,230}
+
+\lstset{
+	numbers=left,
+	stepnumber=1,
+	firstnumber=1,
+	numberstyle=\footnotesize,
+	extendedchars=true,
+	breaklines=true,
+	lineskip=0pt,
+	frame=tb,
+	basicstyle=\ttfamily\footnotesize,
+	showstringspaces=false,
+	stringstyle=\color{corString},
+	commentstyle=\color{corComentario},
+	keywordstyle=\color{corPalavraChave}
+}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\newcommand{\ano}[1]{\def \oano {#1}}
+\newcommand{\imprimirano}{\oano}
+
+\newcommand{\mes}[1]{\def \omes {#1}}
+\newcommand{\imprimirmes}{\omes}
+
+\newcommand{\subtitulo}[1]{\def \osubtitulo {#1}}
+\newcommand{\imprimirsubtitulo}{\osubtitulo}
+
+\newcommand{\area}[1]{\def \aarea {#1}}
+\newcommand{\imprimirarea}{\aarea}
+
+\renewcommand{\coorientador}[1]{\def \ocoorientador {#1}}
+\renewcommand{\imprimircoorientador}{\ocoorientador}
+
+\newcommand{\grau}[1]{\def \ograu {#1}}
+\newcommand{\imprimirgrau}{\ograu}
+
+\newcommand{\curso}[1]{\def \ocurso {#1}}
+\newcommand{\imprimircurso}{\ocurso}
+
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+
+\curso{Bacharelado em Engenharia De Computação}
+\grau{Bacharel em Engenharia De Computação}
+% ---------- 
+% acronimos
+%-----------
+\DeclareAcronym{ssh}{
+  short = SSH ,
+  long  = Secure Shell,
+  sort  =  S,
+}
+\DeclareAcronym{p2p}{
+  short = P2P ,
+  long  = Peer-to-Peer,
+  sort  =  P,
+}
+\DeclareAcronym{seed}{
+  short = Seeds ,
+  long  = máquinas que estão compartilhando o arquivo .torrent,
+  sort  =  P,
+}
+
+\titulo{Transferência de arquivos em redes P2P}
+
+% caso não haja subtítulo, comente a linha abaixo
+% \subtitulo{Subtítulo}
+
+\tipotrabalho{}
+\area{Área}
+
+\autor{
+Carlos Eduardo do Prado Silva – 190715\newline
+Eduardo Campos Gonçalves – 190306\newline
+Gabriel Maciel Silvério – 190654\newline
+João Victor da Costa Wudarski - 190823 (Turma - CP302TIN1)\newline
+Johanna Bernecker – 190737\newline
+Matheus Bernardo Frate – 190110\newline
+Vitor Guilherme Sanches Magnani de Sobral – 190093
+}
+\orientador{Profº Marcos Fabio Jardini}
+
+% caso não haja coorientador, comente a linha abaixo
+% \coorientador{Coorientador}
+
+\local{Sorocaba - Sp}
+\mes{outubro}
+\ano{2022}
+
+\instituicao{%
+	Centro Universitário Facens
+	\par
+	Engenharia De Computação
+}
+
+\preambulo{\imprimirtipotrabalho\ Projeto de pesquisa apresentado ao Curso de Bacharelado em Engenharia da Computação do centro universitário Facens.
+}
+% ---
+
+
+% ---
+% Configurações de aparência do PDF final
+% ---
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+	%pagebackref=true,
+	pdftitle={\@title}, 
+	pdfauthor={\@author},
+	pdfsubject={\imprimirpreambulo},
+	pdfcreator={Nome Completo},
+	pdfkeywords={Palavra chave 1}{Palavra chave 2}{Palavra chave 3}{Palavra chave n}, 
+	colorlinks=true,       		% false: boxed links; true: colored links
+	linkcolor=black,          	% color of internal links
+	citecolor=black,       		% color of links to bibliography
+	filecolor=black,      		% color of file links
+	urlcolor=black,
+	bookmarksdepth=4,
+}
+\makeatother
+% --- 11
+% ---
+% Comandos do autor
+% ---
+
+% comando para inserir autor e ano
+\newcommand{\citeauthorandyear}[1]{\citeauthoronline{#1} (\citeyear{#1})}
+
+
+% ---
+% Novo list of (listings) para Quadros
+% ---
+
+
+
+% configurações para atender às regras da ABNT
+\setfloatadjustment{quadro}{\centering}
+%\counterwithout{quadro}{chapter}
+%\renewcommand{\cftquadroname}{\quadroname\space} 
+%\renewcommand*{\cftquadroaftersnum}{\hfill--\hfill}
+
+% Configuração de posicionamento padrão:
+\setfloatlocations{quadro}{hbtp}
+
+
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+
+
+
+
+
+
+% ---------------------------------------------------------------------------------
+%                                   INÍCIO DO DOCUMENTO
+% ---------------------------------------------------------------------------------
+\begin{document}
+\newcommand{\quadroname}{Quadro}
+\newcommand{\listofquadrosname}{\normalsize \bfseries LISTA DE QUADROS}
+\renewcommand{\listadesimbolosname}{\normalsize \bfseries  LISTA DE SÍMBOLOS}
+\renewcommand{\listadesiglasname}{\normalsize \bfseries LISTA DE ABREVIATURAS E SIGLAS}
+\renewcommand{\agradecimentosname}{\normalsize \bfseries AGRADECIMENTOS}
+\renewcommand{\resumoname}{\normalsize \bfseries RESUMO}
+\addto\captionsbrazil{\renewcommand{\listfigurename}{\normalsize \bfseries LISTA DE FIGURAS}}
+\addto\captionsbrazil{\renewcommand{\listtablename}{\normalsize \bfseries LISTA DE TABELAS}}
+\addto\captionsbrazil{\renewcommand{\bibname}{\normalsize \bfseries REFERÊNCIAS}}
+\addto\captionsbrazil{\renewcommand{\contentsname}{\normalsize \bfseries SUMÁRIO}}
+
+% Seleciona o idioma do documento (conforme pacotes do babel)
+%
+% Retira espaço extra obsoleto entre as frases.
+
+\selectlanguage{brazil}
+\frenchspacing 
+
+
+
+
+% ---------------------------------------------------------------------------------
+%                                   ELEMENTOS PRÉ-TEXTUAIS
+% ---------------------------------------------------------------------------------
+%\pretextual
+
+% ---
+% Capa
+% ---
+%\imprimircapa
+\input{pre01Capa}
+% ---
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+%\imprimirfolhaderosto*
+% \input{pre02FolhaDeRosto}
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{Lista de Figuras}
+\listoffigures*
+\cleardoublepage
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+% \input{pre10ListaSiglas}
+% ---
+\printacronyms[name=Glossário]
+\cleardoublepage
+% ---
+% inserir o sumário
+% ---
+%\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+
+% ---
+% Resumos
+% ---
+% \input{pre08Resumo}
+
+% ---------------------------------------------------------------------------------
+%                                  ELEMENTOS TEXTUAIS
+% ---------------------------------------------------------------------------------
+\textual
+\renewcommand{\ABNTEXchapterfont}{\rmfamily\bfseries\MakeUppercase}
+\renewcommand{\ABNTEXchapterfontsize}{\normalsize}
+\renewcommand{\ABNTEXsectionfont}{\ABNTEXchapterfont}
+\renewcommand{\ABNTEXsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsectionfont}{\ABNTEXsectionfont}
+\renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsubsectionfont}{\ABNTEXsubsectionfont}
+\renewcommand{\ABNTEXsubsubsectionfontsize}{\normalsize}
+\renewcommand{\tocheadstart}{\ABNTEXchapterfont}
+
+
+
+
+
+
+
+\input{capitulo01Introducao}
+\input{capitulo02Objetivos}
+\input{capitulo04ResultadosDiscussao}
+\input{capitulo05Conclusoes}
+%\input{capitulo06Cronograma}
+
+
+
+
+
+% ---------------------------------------------------------------------------------
+%                                 ELEMENTOS PÓS-TEXTUAIS
+% ---------------------------------------------------------------------------------
+% \postextual
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{Referencias}
+
+\end{document}
